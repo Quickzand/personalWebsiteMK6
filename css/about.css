@@ -1,0 +1,230 @@
+.aboutSection {
+}
+
+#missionStatement {
+	padding-left: 5rem;
+	padding-right: 5rem;
+	font-size: 2.5rem;
+	font-family: var(--body-font);
+	border: none;
+	margin-top: 6rem;
+	margin-bottom: 10rem;
+}
+
+.experienceIcon {
+	height: 5rem;
+	filter: drop-shadow(3px 3px 0rem rgba(0, 0, 0, 0.9));
+}
+
+.experience {
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	position: relative;
+	box-shadow: inset 0 0rem 5rem 1rem rgba(0, 0, 0, 0.75);
+	--transition: all 0.5s ease-in-out;
+	transition: var(--transition);
+	margin-bottom: 8rem;
+}
+
+.experience:not(.expanded) {
+	box-shadow: none;
+}
+
+#amazon {
+	background-image: url("../images/seattle.png");
+}
+
+#UCF {
+	background-image: url("../images/reflectionPond.jpeg");
+}
+
+.experienceHeaderLeftSide {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.experienceHeader {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	padding-left: 1rem;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	text-shadow: 3px 3px rgba(0, 0, 0, 0.9);
+	margin-bottom: 15rem;
+	cursor: pointer;
+}
+
+.experienceHeader h3 {
+	font-size: 5rem;
+	height: 5rem;
+	margin: 0;
+	margin-left: 1rem;
+	font-weight: bold;
+}
+
+.experienceHeader .indicator {
+	height: 5rem;
+	transition: var(--transition);
+	fill: var(--second-accent-color);
+	margin-right: 1rem;
+	filter: drop-shadow(6px 6px 0rem rgba(0, 0, 0, 0.9));
+}
+
+.experience.expanded .indicator {
+	transform: rotate(180deg);
+	fill: var(--first-accent-color);
+	filter: drop-shadow(-6px -6px 0rem rgba(0, 0, 0, 0.9));
+}
+
+.experienceHeader h4 {
+	font-size: 3rem;
+	margin: 0;
+	margin-left: 1rem;
+	font-weight: lighter;
+	font-family: var(--subheader-font);
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: baseline;
+	height: 5rem;
+	margin-left: 1rem;
+	font-weight: bold;
+}
+
+.experienceContent {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: flex-start;
+	margin-bottom: 15rem;
+	flex-wrap: wrap;
+	transition: var(--transition);
+}
+
+.experience:not(.expanded) .experienceContent {
+	transform: scaleY(0);
+	opacity: 0;
+	margin: 0;
+	display: none;
+}
+
+.experience:not(.expanded) .experienceHeader {
+	margin-bottom: 0 !important;
+}
+
+.experienceItem {
+	font-size: 1.5rem;
+	padding: 1rem;
+	font-family: var(--body-font);
+	text-shadow: 1.5px 1.5px rgba(0, 0, 0, 0.9);
+	background-color: rgba(0, 0, 0, 0.5);
+	box-shadow: 2px 8px 15px 0 rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	text-align: center;
+	width: 25%;
+	min-width: 10rem;
+	height: 100%;
+	border-radius: 2rem;
+	font-family: 3rem;
+	padding: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	place-items: center;
+	min-height: 10rem;
+}
+
+.experienceItem img {
+	min-width: 10rem;
+	height: 10rem;
+	margin-bottom: 1rem;
+	margin-top: -7rem;
+	filter: drop-shadow(3px 3px 0rem rgba(0, 0, 0, 0.9));
+}
+
+#educationCardsContainer {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	height: 30rem;
+	flex-wrap: wrap;
+}
+
+.educationCard {
+	width: 20rem;
+	height: 25rem;
+	box-shadow: 0.5rem 0.5rem 1rem 1rem rgba(0, 0, 0, 0.25);
+	border-radius: 5rem;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	transition: all 0.25s ease-in-out;
+	border: 1px solid white;
+	padding: 1rem;
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+
+.educationCard:hover {
+	transform: scale(1.1);
+	border: 5px solid var(--second-accent-color);
+}
+
+.educationCard h3 {
+	font-size: 2rem;
+	font-weight: bold;
+	margin: 0;
+	margin-top: 1rem;
+	text-shadow: 3px 3px rgba(0, 0, 0, 0.9);
+}
+.educationCard .glassy {
+	position: absolute;
+	border-radius: 5rem;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	backdrop-filter: blur(5px);
+	-webkit-backdrop-filter: blur(5px);
+}
+
+.educationIcon {
+	width: 50%;
+	aspect-ratio: 1/1;
+	filter: drop-shadow(3px 3px 0rem rgba(0, 0, 0, 0.9));
+}
+
+.educationCard > *:not(.glassy) {
+	z-index: 10;
+	position: relative;
+}
+
+#ucf {
+	background-image: url("../images/reflectionPond.jpeg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#suncoast {
+	background-image: url("../images/suncoastCampus.jpeg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#education h2 {
+	position: relative;
+}
