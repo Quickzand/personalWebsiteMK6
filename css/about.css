@@ -17,18 +17,38 @@
 }
 
 .experience {
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
 	display: flex;
 	flex-direction: column;
 	justify-content: start;
-	position: relative;
 	box-shadow: inset 0 0rem 5rem 1rem rgba(0, 0, 0, 0.75);
 	--transition: all 0.5s ease-in-out;
 	transition: var(--transition);
 	margin-bottom: 8rem;
+	position: relative;
+	overflow: hidden;
+}
+.experienceHeader:before {
+	background-image: url("../images/seattle.webp");
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-size: cover;
+	content: "";
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	will-change: transform;
+	z-index: -1;
+}
+
+.experienceHeaderBG {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
 }
 
 .experience:not(.expanded) {
@@ -36,7 +56,7 @@
 }
 
 #amazon {
-	background-image: url("../images/seattle.png");
+	background-image: url("../images/seattle.webp");
 }
 
 #UCF {
@@ -50,6 +70,7 @@
 }
 
 .experienceHeader {
+	position: relative;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -175,10 +196,12 @@
 	padding: 1rem;
 	margin-left: 1rem;
 	margin-right: 1rem;
+	--scale: 1;
+	transform: scale(var(--scale));
 }
 
-.educationCard:hover {
-	transform: scale(1.1);
+.educationCard:hover:not(.opening) {
+	--scale: 1.1;
 	border: 5px solid var(--second-accent-color);
 }
 
@@ -211,6 +234,24 @@
 	position: relative;
 }
 
+.educationCard.opening {
+	animation: openEducationCard 2s ease-in forwards;
+	z-index: 100;
+	position: relative;
+}
+
+.educationCard.opening + .educationCard:not(.opening) {
+	opacity: 0;
+}
+
+.educationCard > * {
+	transition: all 0.25s ease-in-out;
+}
+
+.educationCard.opening > * {
+	opacity: 0;
+}
+
 #ucf {
 	background-image: url("../images/reflectionPond.jpeg");
 	background-size: cover;
@@ -227,4 +268,12 @@
 
 #education h2 {
 	position: relative;
+}
+
+@keyframes openEducationCard {
+	to {
+		transform: scale(50);
+		opacity: 0;
+		pointer-events: none;
+	}
 }

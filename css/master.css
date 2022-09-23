@@ -139,6 +139,7 @@ h2 {
 }
 
 h2::after {
+	/* make the content the content of the parent  */
 	content: attr(data-text);
 	position: absolute;
 	top: 0;
