@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="js/jquery.js"></script>
 		<script async defer src="js/nav.js"></script>
 		<script async defer src="js/about.js"></script>
+		<script async defer src="js/skills.js"></script>
+		<script async defer src="js/projects.js"></script>
+
 		<script src="js/socials.js" async defer></script>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,6 +14,8 @@
 		<title>Matthew Sand</title>
 		<link rel="stylesheet" href="css/master.css" />
 		<link rel="stylesheet" href="css/about.css" />
+		<link rel="stylesheet" href="css/skills.css" />
+		<link rel="stylesheet" href="css/projects.css" />
 	</head>
 	<body>
 		<header>
@@ -42,9 +47,24 @@
 		</header>
 		<div>
 			<nav>
-				<div class="navButton selected" style="animation-delay: 0">About</div>
-				<div class="navButton" style="animation-delay: 0.3s">Skills</div>
-				<div class="navButton" style="animation-delay: 0.6s">Projects</div>
+				<div
+					class="navButton selected"
+					style="animation-delay: 0"
+					data-navTo="about">
+					About
+				</div>
+				<div
+					class="navButton"
+					style="animation-delay: 0.3s"
+					data-navTo="skills">
+					Skills
+				</div>
+				<div
+					class="navButton"
+					style="animation-delay: 0.6s"
+					data-navTo="projects">
+					Projects
+				</div>
 			</nav>
 			<h2 id="missionStatement">
 				My goal as a software engineer is to create code with perspective and
@@ -97,6 +117,11 @@
 					</div>
 				</div>
 			</div>
+			<svg width="600" height="400">
+				<mask id="skillMask">
+					<polygon fill="#ffffff" points="200 0, 400 400, 0 400"></polygon>
+				</mask>
+			</svg>
 
 			<div id="education" class="aboutSection">
 				<h2 data-text="Education">Education</h2>
@@ -116,11 +141,83 @@
 					</div>
 				</div>
 			</div>
-			<div id="events" class="aboutSection">
-				<h2 data-text="Events">Events</h2>
+			<div id="educationSlideover" class="">
+				<h2 id="educationTitle">...</h2>
+				<h4 id="educationDegree">...</h4>
+				<h5 id="educationSubtitle">
+					<span id="educationDate"></span> | <span id="gpa"></span>
+				</h5>
+				<div id="educationContent">
+					<div id="test">
+						<div id="courses">
+							<h6>Important Courses</h6>
+							<div id="coursesContainer"></div>
+						</div>
+
+						<div id="clubs">
+							<h6>Clubs</h6>
+							<div id="clubsContainer"></div>
+						</div>
+
+						<div id="activities">
+							<h6>Activities</h6>
+							<div id="activitiesContainer"></div>
+						</div>
+					</div>
+					<div id="educationImage">
+						<img src="images/reflectionPond.jpeg" alt="School Image" />
+					</div>
+				</div>
+				<div id="closeSlideover">
+					<svg
+						viewbox="0 0 1500 1500"
+						xmlns="http://www.w3.org/2000/svg"
+						xmlns:xlink="http://www.w3.org/1999/xlink">
+						<path
+							id="Rectangular-Corner"
+							fill-rule="evenodd"
+							stroke="none"
+							d="M 758 306.537842 L 901.888 450.425903 L 1500.462158 1049 L 1356.574097 1192.887939 L 758 594.313843 L 159.425888 1192.887939 L 15.53788 1049 L 614.112 450.425903 L 758 306.537842 Z" />
+					</svg>
+				</div>
 			</div>
-			<div id="" class="aboutSection">
-				<h2 data-text="Activities">Activities</h2>
+
+			<div id="skills">
+				<h2 data-text="Skills">Skills</h2>
+				<h4>Programming Languages</h4>
+				<div class="skillsContainer" id="skillsContainer"></div>
+			</div>
+
+			<div id="projects">
+				<h2 data-text="Projects">Projects</h2>
+				<div id="projectsContainer">
+					<div id="projectPreviewsContainer"></div>
+					<div id="projectInfoContainer">
+						<div id="projectDivider">
+							<div id="projectLeftSide">
+								<div id="projectName">Project Name</div>
+								<div id="projectSubtitle">
+									<div id="projectTechnologies">
+										<div id="projectTechnologiesContainer"></div>
+									</div>
+								</div>
+								<div id="projectDescription"></div>
+								<div id="projectImages">
+									<img
+										src="images/projects/dequeuePreview.png"
+										alt="project  image"
+										id="projectImage" />
+									<div id="projectImageSelectorContainer"></div>
+								</div>
+								</div>
+								<div id="projectRightSide">
+									<div id="projectLinksTitle">Links:</div>
+									<div id="projectLinks"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>
