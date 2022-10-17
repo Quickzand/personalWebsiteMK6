@@ -147,6 +147,7 @@ function selectProject(id) {
 	}
 
 	// Creates links
+	$("#projectLinks").empty();
 	for (var i in currentProject.links) {
 		var currentLink = currentProject.links[i];
 		var link = $("<div>").addClass("link");
