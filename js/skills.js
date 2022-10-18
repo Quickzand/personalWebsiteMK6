@@ -1,4 +1,4 @@
-const skills = [
+const programmingLanguages = [
 	{
 		name: "HTML",
 		level: 1,
@@ -61,22 +61,7 @@ function skillBuilder(skill) {
 	var skillIcon = $("<img>").attr("src", skill.icon).addClass("skillIcon");
 	var progressCircle = $("<div>").addClass("progressCircle");
 	// Set the css variable --progress to the skill level
-
-	// Animate the skills progress value from 0 to the skill level
-	// Use the animate function from jQuery
-	// easing in and out
-
-	setInterval(function () {
-		if (skill.level <= progressCircle.css("--progress")) {
-			// Ends calling the function
-			clearInterval();
-			return;
-		}
-		progressCircle.css(
-			"--progress",
-			Number(progressCircle.css("--progress")) + 0.01
-		);
-	}, 10);
+	progressCircle.css("--progress", skill.level);
 
 	var progressCircleInner = $("<div>").addClass("progressCircleInner");
 	progressCircleInner.append(skillIcon, skillName);
@@ -89,10 +74,201 @@ function skillBuilder(skill) {
 	return skillContainer;
 }
 
+// for (var i = 0; i < skills.length; i++) {
+// 	var skill = skills[i];
+// 	var skillContainer = skillBuilder(skill);
+// 	$("#skillsContainer").append(skillContainer);
+// }
+
+// SKILLS PHYSICS STARTS HERE
+var engine = Matter.Engine.create();
+
+var render = Matter.Render.create({
+	element: document.getElementById("skillsContainer"),
+	engine: engine,
+	options: {
+		width: $("#skillsContainer").width(),
+		height: $("#skillsContainer").height(),
+		wireframes: false,
+		background: "transparent",
+	},
+});
+
+Matter.Engine.run(engine);
+Matter.Render.run(render);
+
+// Puts walls around each .skills div
+var skills = $(".skillContainer");
 for (var i = 0; i < skills.length; i++) {
 	var skill = skills[i];
-	var skillContainer = skillBuilder(skill);
-	$("#skillsContainer").append(skillContainer);
+	var skillRect = skill.getBoundingClientRect();
+	var skillBody = Matter.Bodies.rectangle(
+		skillRect.left + skillRect.width / 2,
+		skillRect.top + skillRect.height / 2,
+		skillRect.width,
+		skillRect.height,
+		{
+			isStatic: true,
+			render: {
+				fillStyle: "transparent",
+				strokeStyle: "transparent",
+			},
+		}
+	);
+	Matter.World.add(engine.world, skillBody);
 }
 
-// $("#skillsContainer").append(skillBuilder(skills[0]));
+// Make the circles bounce off the walls
+var walls = [
+	Matter.Bodies.rectangle(
+		$("#skillsContainer").width() / 2,
+		0,
+		$("#skillsContainer").width(),
+		1,
+		{
+			isStatic: true,
+			render: {
+				fillStyle: "transparent",
+			},
+		}
+	),
+	Matter.Bodies.rectangle(
+		$("#skillsContainer").width() / 2,
+		$("#skillsContainer").height(),
+		$("#skillsContainer").width(),
+		1,
+		{
+			isStatic: true,
+			render: {
+				fillStyle: "transparent",
+			},
+		}
+	),
+	Matter.Bodies.rectangle(
+		0,
+		$("#skillsContainer").height() / 2,
+		1,
+		$("#skillsContainer").height(),
+		{
+			isStatic: true,
+			render: {
+				fillStyle: "transparent",
+			},
+		}
+	),
+	Matter.Bodies.rectangle(
+		$("#skillsContainer").width(),
+		$("#skillsContainer").height() / 2,
+		1,
+		$("#skillsContainer").height(),
+		{
+			isStatic: true,
+			render: {
+				fillStyle: "transparent",
+			},
+		}
+	),
+	Matter.Bodies.rectangle(
+		$("#skillsContainer").width() / 3,
+		$("#skillsContainer").height() / 2,
+		50,
+		$("#skillsContainer").height(),
+		{
+			isStatic: true,
+			render: {
+				fillStyle: "transparent",
+			},
+		}
+	),
+	Matter.Bodies.rectangle(
+		(2 * $("#skillsContainer").width()) / 3,
+		$("#skillsContainer").height() / 2,
+		100,
+		$("#skillsContainer").height(),
+		{
+			isStatic: true,
+			render: {
+				fillStyle: "transparent",
+			},
+		}
+	),
+];
+
+Matter.World.add(engine.world, walls);
+
+// Add circles and have the respective Skill DOM element follow the circle
+var skillContainers = [];
+var skillBody = [];
+for (var i = 0; i < programmingLanguages.length; i++) {
+	var skill = programmingLanguages[i];
+	var skillContainer = skillBuilder(skill);
+	$("#programmingLanguages").append(skillContainer);
+
+	var circle = Matter.Bodies.circle(
+		Math.random() * $("#programmingLanguages").width(),
+		Math.random() * $("#programmingLanguages").height(),
+		skillContainer.width() / 2,
+		{
+			restitution: 1,
+			friction: 0.5,
+			render: {
+				fillStyle: "transparent",
+			},
+		}
+	);
+	skillContainers.push(skillContainer);
+	skillBody.push(circle);
+
+	Matter.World.add(engine.world, circle);
+}
+
+var width = $(".skillContainer").width();
+var height = $(".skillContainer").height();
+// Make the corresponding DOM element follow the circle using transform with rotation
+Matter.Events.on(engine, "afterUpdate", function () {
+	for (var i = 0; i < skillContainers.length; i++) {
+		skillContainers[i].css(
+			"transform",
+			"translate(" +
+				(skillBody[i].position.x - width / 2) +
+				"px," +
+				(skillBody[i].position.y - height / 2) +
+				"px)"
+		);
+	}
+});
+
+// Add a floor
+var floor = Matter.Bodies.rectangle(
+	$("#skillsContainer").width() / 2,
+	$("#skillsContainer").height() * 1,
+	$("#skillsContainer").width(),
+	10,
+	{
+		isStatic: true,
+		render: {
+			fillStyle: "transparent",
+		},
+	}
+);
+Matter.World.add(engine.world, floor);
+
+// Make circles grabbable and draggable
+var mouse = Matter.Mouse.create(render.canvas);
+var mouseConstraint = Matter.MouseConstraint.create(engine, {
+	mouse: mouse,
+	constraint: {
+		render: {
+			visible: false,
+		},
+	},
+});
+Matter.World.add(engine.world, mouseConstraint);
+
+// When the window is resized, update the canvas size and the physics engine
+$(window).resize(function () {
+	render.canvas.width = $("#skillsContainer").width();
+	render.canvas.height = $("#skillsContainer").height();
+	render.options.width = $("#skillsContainer").width();
+	render.options.height = $("#skillsContainer").height();
+});
