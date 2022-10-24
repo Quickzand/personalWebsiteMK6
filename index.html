@@ -3,6 +3,7 @@
 	<head>
 		<script src="js/jquery.js"></script>
 		<script src="js/matter.js"></script>
+		<script async defer src="js/main.js"></script>
 		<script async defer src="js/nav.js"></script>
 		<script async defer src="js/about.js"></script>
 		<script async defer src="js/skills.js"></script>
@@ -17,14 +18,64 @@
 		<link rel="stylesheet" href="css/about.css" />
 		<link rel="stylesheet" href="css/skills.css" />
 		<link rel="stylesheet" href="css/projects.css" />
+
+		<link rel="icon" href="images/logo.svg" />
 	</head>
 	<body>
+		<div id="changeThemeModeButton" onclick="toggleLightMode()">
+			<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+				<path
+					d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8V16Z" />
+				<path
+					fill-rule="evenodd"
+					clip-rule="evenodd"
+					d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4V8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16V20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z"
+					fill="black" />
+			</svg>
+		</div>
 		<header>
-			<div class="" id="introNav">
-				<div class="navButton selected" style="animation-delay: 0">About</div>
-				<div class="navButton" style="animation-delay: 0.3s">Skills</div>
-				<div class="navButton" style="animation-delay: 0.6s">Projects</div>
-			</div>
+			<nav>
+				<div class="navButton selected" style="animation-delay: 0">
+					<svg
+						viewBox="0 0 100 100"
+						xmlns="http://www.w3.org/2000/svg"
+						xmlns:xlink="http://www.w3.org/1999/xlink">
+						<path
+							id="Person"
+							fill-rule="evenodd"
+							stroke="none"
+							d="M 90.966667 100.5 L 9.3 100.5 C 5.224599 100.5 -1.69049 103.859276 -3 102 C -4.028901 100.539139 0.137003 94.05719 0.133333 92.360466 C 0.140124 90.77845 0.421521 89.207832 0.966667 87.709305 C 7.194159 71.127899 26.834154 59.027134 50.133335 59.027134 C 73.432487 59.027134 93.070854 71.127899 99.300003 87.709305 C 99.845139 89.207832 100.126564 90.77845 100.133331 92.360466 C 100.071457 108.807259 104.401443 104.364639 90.966667 100.5 Z M 50.133335 48.562016 C 37.01667 48.562016 26.383333 37.803101 26.383333 24.531006 C 26.383333 11.258911 37.01667 0.5 50.133335 0.5 C 63.249992 0.5 73.883331 11.258911 73.883331 24.531006 C 73.883331 37.803101 63.249992 48.562016 50.133335 48.562016 Z" />
+					</svg>
+					<span class="navButtonText">About</span>
+				</div>
+
+				<div class="navButton" style="animation-delay: 0.3s">
+					<svg
+						viewBox="0 0 512 512"
+						xmlns="http://www.w3.org/2000/svg"
+						xmlns:xlink="http://www.w3.org/1999/xlink">
+						<path
+							id="Book"
+							fill-rule="evenodd"
+							stroke="none"
+							d="M 494.139526 460.404907 C 489.826538 460.52832 485.608765 459.122437 482.232544 456.435913 C 426.350281 407.700562 343.572418 406.028198 285.767456 452.466919 C 282.760651 454.721863 278.738129 455.084656 275.376465 453.403809 C 272.015015 451.723083 269.891479 448.287292 269.891479 444.528931 L 269.891479 117.087067 C 269.891479 107.206238 276.321228 100.744751 279.813965 97.242096 C 307.140503 69.824341 345.064209 51.598694 386.976746 51.598694 C 431.340607 51.734955 473.412781 71.320221 502.077515 105.180084 C 505.609985 109.325684 512 117.136719 512 127.009552 L 512 442.544434 C 512 452.408508 504.003632 460.404907 494.139526 460.404907 Z M 232.18605 454.451416 C 230.038391 454.45575 227.948044 453.758942 226.232559 452.466919 C 168.427567 406.028198 85.649712 407.700562 29.767443 456.435913 C 26.389898 459.120117 22.173086 460.525757 17.860466 460.404907 C 7.996367 460.404907 0 452.408508 0 442.544434 L 0 127.009552 C 0 117.136719 6.384084 109.325684 9.922481 105.180084 C 38.58733 71.320221 80.659523 51.734955 125.023254 51.598694 C 166.933868 51.598694 204.859497 69.824341 232.18605 97.242096 C 235.678772 100.744751 242.108521 107.206238 242.108521 117.087067 L 242.108521 444.528931 C 242.108521 450.008942 237.666183 454.451416 232.18605 454.451416 Z" />
+					</svg>
+					<span class="navButtonText">Skills</span>
+				</div>
+				<div class="navButton" style="animation-delay: 0.6s">
+					<svg
+						viewBox="0 0 512 512"
+						xmlns="http://www.w3.org/2000/svg"
+						xmlns:xlink="http://www.w3.org/1999/xlink">
+						<path
+							id="path1"
+							fill-rule="evenodd"
+							stroke="none"
+							d="M 512 255.2323 L 428.128082 435.938171 L 379.329865 422.213684 L 458.626953 255.2323 L 379.329865 89.394623 L 428.128082 75.670105 Z M 317.950867 109.218872 L 240.178711 381.421417 L 190.618027 381.421417 L 269.152649 109.218872 Z M 132.670135 422.213684 L 83.871925 435.938171 L -0 255.2323 L 83.871925 75.670105 L 132.670135 89.394623 L 53.373047 255.2323 Z" />
+					</svg>
+					<span class="navButtonText">Projects</span>
+				</div>
+			</nav>
 			<div id="introText" class="glassy">
 				<h1>Hi, I'm Matthew</h1>
 				<h3>
@@ -47,7 +98,7 @@
 			</div>
 		</header>
 		<div>
-			<nav>
+			<!-- <nav>
 				<div
 					class="navButton selected"
 					style="animation-delay: 0"
@@ -66,7 +117,7 @@
 					data-navTo="projects">
 					Projects
 				</div>
-			</nav>
+			</nav> -->
 			<h2 id="missionStatement">
 				My goal as a software engineer is to create code with perspective and
 				purpose - and to ultimately make the world a more human friendly place.
@@ -185,13 +236,16 @@
 
 			<div id="skills">
 				<h2 data-text="Skills">Skills</h2>
-				<h4>Programming Languages</h4>
 				<div class="" id="skillsContainer">
-					<div id="actualSkillsContainer">
-						<div class="skills" id="programmingLanguages"></div>
-						<div class="skills"></div>
-						<div class="skills"></div>
-					</div>
+					<div
+						class="skills"
+						id="programmingLanguages"
+						data-title="Programming Languages"></div>
+					<div class="skills" data-title="Technologies" id="technologies"></div>
+					<div
+						class="skills"
+						data-title="Proficiencies"
+						id="proficiencies"></div>
 				</div>
 
 				<div id="projects">

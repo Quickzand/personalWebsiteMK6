@@ -5,7 +5,7 @@ function init() {
 		navTo($(this));
 	});
 	navScroll();
-	metaTagsBuilder();
+	navButtonAnimation();
 }
 
 function navTo(navButton) {
@@ -35,9 +35,17 @@ function navScroll() {
 		nav.removeClass("hidden");
 	}
 }
+
+var navElement = $("nav");
 // Run nav scroll on scroll
 $(window).scroll(function () {
 	navScroll();
+	// If scrolled 100 px add hidden class to $("nav")
+	if ($(window).scrollTop() > 100) {
+		navElement.addClass("scrolled");
+	} else {
+		navElement.removeClass("scrolled");
+	}
 });
 
 // Scrolls page to element
@@ -50,30 +58,12 @@ function scrollTo(id) {
 	);
 }
 
-// Constructs the meta tags and icon for the webpage
-function metaTagsBuilder() {
-	var author = $("<meta>")
-		.attr("name", "author")
-		.attr("content", "Matthew Sand");
-	var description = $("<meta>")
-		.attr("name", "description")
-		.attr("content", "Fullstack Web Developer and Computer Science Student");
-	var keywords = $("<meta>")
-		.attr("name", "keywords")
-		.attr(
-			"content",
-			"Resume, Fullstack, Developer, Computer Science, University, Central, Florida, Matthew, Sand, Matthew Sand, Programmer"
-		);
-	var viewport = $("<meta>")
-		.attr("name", "viewport")
-		.attr("content", "width=device-width, initial-scale=1.0");
-	var icon = $("<link>").attr("rel", "icon").attr("href", "favicon.ico");
-	$("head")
-		.append(author)
-		.append(description)
-		.append(keywords)
-		.append(viewport)
-		.append(icon);
+// Adds animation delay variable to each navButtonText based on index
+function navButtonAnimation() {
+	var navButtons = $(".navButtonText");
+	navButtons.each(function (index) {
+		$(this).css("--index", index);
+	});
 }
 
 // Runs init when the window loads

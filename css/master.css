@@ -20,32 +20,83 @@
 	--header-font: "Poppins", sans-serif;
 	--body-font: "Nunito", sans-serif;
 	--main-glassy-background-color: rgba(0, 0, 0, 0.5);
+	--main-text-shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+:root.lightMode {
+	--main-background-color: #fff;
+	--outset-background-color: #f0f0f0;
+	--secondary-background-color: #f5f5f5;
+	--main-font-color: #010101;
+	--first-accent-color: #17965d;
+	--second-accent-color: #06ace8;
+	--main-gradient: linear-gradient(
+		135deg,
+		var(--first-accent-color) 0%,
+		var(--second-accent-color) 100%
+	);
+	--first-glossy-accent-color: rgba(35, 209, 131, 0.5);
+	--second-glossy-accent-color: rgba(6, 172, 232, 0.5);
+	--main-glassy-background-color: rgba(255, 255, 255, 0.5);
+	--main-text-shadow-color: rgba(255, 255, 255, 0.5);
+}
+
+#changeThemeModeButton {
+	position: fixed;
+	bottom: 1rem;
+	right: 1rem;
+	border: none;
+	cursor: pointer;
+	z-index: 1000;
+	transition: all 0.5s ease-in-out;
+	transform-origin: center;
+	--base-transform: scale(1);
+	transform: var(--base-transform);
+}
+
+#changeThemeModeButton:hover {
+	--base-transform: scale(1.1);
+}
+
+:root.lightMode #changeThemeModeButton {
+	transform: var(--base-transform) rotate(180deg);
+}
+
+#changeThemeModeButton svg {
+	width: 2rem;
+	height: 2rem;
+	pointer-events: none;
+}
+
+#changeThemeModeButton svg path {
+	fill: var(--main-font-color);
 }
 
 body {
 	padding: 0;
 	margin: 0;
 	background-color: var(--main-background-color);
+	transition: all 0.5s ease-in-out;
 	color: var(--main-font-color);
 	width: 100vw;
 	min-height: 300vh;
 }
 
-#introNav {
-	position: absolute;
-	top: 0;
+nav {
+	position: fixed;
+	top: 50%;
 	right: 0;
-	height: 100vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	font-family: var(--header-font);
 	font-size: 2.5rem;
 	z-index: 100;
+	transform: translateY(-50%);
 	text-shadow: 0.2rem 0.2rem rgba(0, 0, 0, 0.9);
 }
 
-#introNav .navButton {
+.navButton {
 	padding-top: 1rem;
 	padding-bottom: 1rem;
 	cursor: pointer;
@@ -53,6 +104,9 @@ body {
 	transition: all 0.25s ease-in-out;
 	border-right: 0px solid var(--main-font-color);
 	padding-right: 1rem;
+	display: flex;
+	align-items: flex-end;
+	flex-direction: row-reverse;
 	animation-name: bounceInFromRight;
 	animation-duration: 0.5s;
 	animation-timing-function: ease-in;
@@ -62,32 +116,104 @@ body {
 ::-webkit-scrollbar {
 	display: none;
 }
-#introNav .navButton:hover {
+
+.navButton svg {
+	height: 2rem;
+	fill: var(--main-font-color);
+	filter: drop-shadow(0.2rem 0.2rem rgba(0, 0, 0, 0.9));
+	margin-right: 0.5rem;
+	transition: transform 0.25s ease-in-out 0.05s, opacity 0.25s ease-in-out;
+}
+
+.navButton.selected svg {
+	fill: var(--first-accent-color);
+	position: absolute;
+	right: 0.3rem;
+}
+
+.navButton:hover svg {
+	fill: var(--second-accent-color);
+}
+
+nav.scrolled svg {
+	transform: translateX(0%);
+}
+
+nav:not(.scrolled) svg,
+nav:hover svg {
+	transform: translateX(200%);
+	opacity: 0;
+}
+
+.navButtonText {
+	width: 100%;
+	right: -150%;
+	position: relative;
+	animation-name: navTextAnimation;
+	animation-duration: 0.5s;
+	animation-timing-function: ease-in-out;
+	animation-delay: calc(var(--animation-delay) * 0.5s);
+	animation-fill-mode: forwards;
+}
+
+@keyframes navTextAnimation {
+	0% {
+		right: -150%;
+	}
+
+	90% {
+		right: 10%;
+	}
+
+	100% {
+		right: 0%;
+	}
+}
+
+@keyframes navTextOutAnimation {
+	0% {
+		right: 0%;
+	}
+
+	100% {
+		right: -150%;
+	}
+}
+
+/* When scrolled more than 100 px */
+nav.scrolled:not(:hover) .navButtonText {
+	animation-name: navTextOutAnimation;
+	animation-duration: 0.5s;
+	animation-timing-function: ease-in-out;
+	animation-delay: calc(var(--animation-delay) * 0.5s);
+	animation-fill-mode: forwards;
+}
+
+nav .navButton:hover {
 	color: var(--second-accent-color);
 	padding-right: 5rem;
 	border-right: 0.5rem solid var(--second-accent-color);
 }
 
-#introNav .navButton.selected {
+nav .navButton.selected {
 	color: var(--first-accent-color);
 	padding-right: 3rem;
 	border-right: 0.5rem solid var(--first-accent-color);
 }
-
+/* 
 nav {
 	position: sticky;
 	top: 0;
+	display: none;
 	left: 100%;
-	display: inline-flex;
 	flex-direction: row;
 	justify-content: flex-end;
 	align-items: center;
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: var(--main-glassy-background-color);
 	box-shadow: 2px 8px 15px 0 rgba(0, 0, 0, 0.5);
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(10px);
 	z-index: 100;
-	/* makes the bottom left corner have a border radius of 5 rem */
 	border-bottom-left-radius: 3rem;
 	overflow: hidden;
 	transition: all 0.25s ease-in-out;
@@ -113,7 +239,7 @@ nav .navButton:hover {
 
 nav .navButton.selected {
 	color: var(--first-accent-color);
-}
+} */
 
 nav.hidden {
 	opacity: 0;
@@ -194,7 +320,8 @@ header {
 
 .introPicture {
 	width: 100%;
-	min-height: 100%;
+	height: 100%;
+	object-fit: cover;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -285,7 +412,7 @@ header {
 }
 
 .glassy {
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: var(--main-glassy-background-color);
 	box-shadow: 2px 8px 15px 0 rgba(0, 0, 0, 0.5);
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(10px);

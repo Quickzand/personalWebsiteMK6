@@ -62,6 +62,8 @@ $(".experienceHeader").click(function () {
 	$(this).parent().toggleClass("expanded");
 });
 
+$(".experienceHeader").click();
+
 $(".educationCard").click(function () {
 	$("#educationSlideover").addClass("expanded");
 	var school = $(this).attr("id");

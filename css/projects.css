@@ -40,7 +40,7 @@
 	display: grid;
 	place-items: center left;
 	transition: all 0.25s ease-in-out;
-	text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 1);
+	text-shadow: 0.2rem 0.2rem 0.2rem var(--main-text-shadow-color);
 	white-space: nowrap;
 }
 
@@ -283,7 +283,7 @@
 	width: 100%;
 	height: 3.5rem;
 	border-radius: 3.5rem;
-	text-shadow: 0.1rem 0.1rem 0.005rem rgba(0, 0, 0, 0.5);
+	text-shadow: 0.1rem 0.1rem 0.005rem var(--main-text-shadow-color);
 	font-size: var(--content-size);
 	font-family: var(--header-font);
 	text-align: center;
